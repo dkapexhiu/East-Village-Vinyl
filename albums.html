@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Albums</title>
+     <link rel="stylesheet" type="text/css" href="css/style-albums.css">
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+<body background="assets/rock-albums.jpg">
+  <header>
+     <div class="topnav" id="myTopnav">
+  		<a href="index.html">Home</a>
+  		<a href="albums.html">Albums</a>
+      <a href="about.html">About</a>
+  		<a href="contact.html">Contact</a>
+  		<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+	</div>
+    </header>
+  <div class="products">
+  	<div id="albumListing">
+		</div>
+  </div>
+  <footer>
+  	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  	<script>
+    $(document).ready(function() {
+      $.getJSON("js/json.js", function(response) {
+      var albumList = '<ul class="albums">';
+      $.each(response, function(index, album) {
+      if (album.quantity > 0) {
+        albumList += '<li class="item available">';
+      } else {
+        albumList += '<li class="item sold-out">';
+      } 
+      albumList += '<br>'+'<br>'+'<br>'+"Artist: " + album.artist+'<br>'+"Album: " + album.album +'<br>'+"Year: "+album.year+'<br>'+"Tracks: "+album.tracks+'<br>';
+      albumList += '<button class="btn btn-default">Buy</button>';
+      albumList += "</li>";
+      });
+      albumList += "</ul>";
+      $("#albumListing").html(albumList);
+      });
+    });
+    </script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="js/albums-script.js"></script>
+  </footer>
+</body>
+</html>
